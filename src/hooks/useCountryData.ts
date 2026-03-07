@@ -10,10 +10,6 @@ interface UseCountryDataReturn {
   clearCountry: () => void;
 }
 
-/**
- * Manages all async state related to a selected country.
- * Components only depend on this hook's interface, not on the service directly (DIP).
- */
 const useCountryData = (): UseCountryDataReturn => {
   const [selectedData, setSelectedData] = useState<SelectedCountryData | null>(null);
   const [loading, setLoading] = useState(false);

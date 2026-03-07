@@ -4,23 +4,15 @@ import './Starfield.css';
 interface Star {
   x: number;
   y: number;
-  /** depth 0..1 — smaller = farther away */
   depth: number;
   baseOpacity: number;
   phaseOffset: number;
 }
 
 const NUM_STARS = 280;
-// How fast the whole field drifts downward (px/frame at depth=1)
 const DRIFT_SPEED = 0.06;
-// Twinkle amplitude
 const TWINKLE_AMP = 0.18;
 
-/**
- * Starfield — full-screen canvas that renders an animated star field.
- *
- * Single responsibility: visual atmosphere only.  No business logic.
- */
 const Starfield = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -54,12 +46,10 @@ const Starfield = () => {
     const draw = () => {
       frame++;
 
-      // Clear with deep-space colour
       ctx.fillStyle = '#030712';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       for (const star of stars) {
-        // Parallax drift — farther stars (low depth) move slower
         star.y += DRIFT_SPEED * star.depth;
         if (star.y > canvas.height) star.y -= canvas.height;
 

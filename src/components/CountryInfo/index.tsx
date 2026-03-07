@@ -2,6 +2,7 @@ import type { State } from '../../types';
 import type { SelectedCountryData } from '../../types';
 import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingSpinner from '../LoadingSpinner';
+import { FiChevronRight } from 'react-icons/fi';
 import './CountryInfo.css';
 
 interface CountryInfoProps {
@@ -17,7 +18,6 @@ interface InfoRowProps {
   value: string | undefined;
 }
 
-/** Stateless row used to display a single country property. */
 const InfoRow = ({ label, value }: InfoRowProps) => {
   if (!value) return null;
   return (
@@ -28,12 +28,6 @@ const InfoRow = ({ label, value }: InfoRowProps) => {
   );
 };
 
-/**
- * CountryInfo — sidebar panel.
- *
- * Single responsibility: display detailed information for the selected country.
- * Receives all data via props, keeping it a pure presentational component (DIP).
- */
 const CountryInfo = ({ data, loading, error, onClose, onStateClick }: CountryInfoProps) => {
   const { t } = useLanguage();
   const isVisible = loading || !!data || !!error;
@@ -61,10 +55,10 @@ const CountryInfo = ({ data, loading, error, onClose, onStateClick }: CountryInf
 
           <section className="info-section">
             <h3 className="section-title">{t.sectionGeneral}</h3>
-            <InfoRow label={t.labelCapital}    value={data.country.capital} />
-            <InfoRow label={t.labelRegion}     value={data.country.region} />
-            <InfoRow label={t.labelSubregion}  value={data.country.subregion} />
-            <InfoRow label={t.labelNative}     value={data.country.native} />
+            <InfoRow label={t.labelCapital} value={data.country.capital} />
+            <InfoRow label={t.labelRegion} value={data.country.region} />
+            <InfoRow label={t.labelSubregion} value={data.country.subregion} />
+            <InfoRow label={t.labelNative} value={data.country.native} />
           </section>
 
           <section className="info-section">
@@ -98,7 +92,9 @@ const CountryInfo = ({ data, loading, error, onClose, onStateClick }: CountryInf
                     {state.iso2 && (
                       <span className="state-code">{state.iso2}</span>
                     )}
-                    <span className="state-arrow">›</span>
+                    <span className="state-arrow" aria-hidden="true">
+                      <FiChevronRight />
+                    </span>
                   </li>
                 ))}
               </ul>

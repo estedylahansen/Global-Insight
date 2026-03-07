@@ -1,13 +1,6 @@
 import type { Country, State, City } from '../types';
 import httpClient from './httpClient';
 
-/**
- * CountryStateCity API façade.
- *
- * Each function has a single responsibility (SRP) and depends on the
- * abstract httpClient rather than on Axios directly (DIP).
- */
-
 export const getCountries = async (): Promise<Country[]> => {
   const { data } = await httpClient.get<Country[]>('/countries');
   return data;

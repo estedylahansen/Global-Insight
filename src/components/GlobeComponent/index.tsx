@@ -6,30 +6,21 @@ import useGeoData from '../../hooks/useGeoData';
 import LoadingSpinner from '../LoadingSpinner';
 import { useLanguage } from '../../contexts/LanguageContext';
 
-// ─── Geometry helpers ─────────────────────────────────────────────────────────
-
 interface Geometry {
   type: string;
   coordinates: unknown[];
 }
-
 interface Centroid {
   lat: number;
   lng: number;
 }
 
-/**
- * Compute the rough centroid of a GeoJSON Polygon or MultiPolygon.
- * Handles both geometry types without crashing on nested arrays.
- */
 const computeCentroid = (geometry: Geometry): Centroid | null => {
   let pairs: number[][] = [];
 
   if (geometry.type === 'Polygon') {
-    // coordinates: number[][][]  =>  flat(1) => [[lng,lat], ...]
     pairs = (geometry.coordinates as number[][][]).flat(1);
   } else if (geometry.type === 'MultiPolygon') {
-    // coordinates: number[][][][]  =>  flat(2) => [[lng,lat], ...]
     pairs = (geometry.coordinates as number[][][][]).flat(2);
   }
 
@@ -59,12 +50,6 @@ const SELECTED_COLOR = '#f59e0b';
 const SIDE_COLOR = 'rgba(0, 120, 255, 0.15)';
 const STROKE_COLOR = 'rgba(255,255,255,0.3)';
 
-/**
- * GlobeComponent — owns the 3D globe rendering.
- *
- * Single responsibility: visualise geographic polygons and delegate
- * the click event upward (open/closed principle).
- */
 const GlobeComponent = ({ selectedIso2, onCountryClick }: GlobeComponentProps) => {
   const globeRef = useRef<GlobeMethods | undefined>(undefined);
   const { geoData, loading, error } = useGeoData();
@@ -72,7 +57,6 @@ const GlobeComponent = ({ selectedIso2, onCountryClick }: GlobeComponentProps) =
   const [hoveredIso2, setHoveredIso2] = useState<string | null>(null);
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Enable auto-rotation as soon as the globe is initialised
   const handleGlobeReady = useCallback(() => {
     if (!globeRef.current) return;
     const controls = globeRef.current.controls();
@@ -117,7 +101,6 @@ const GlobeComponent = ({ selectedIso2, onCountryClick }: GlobeComponentProps) =
       const centroid = computeCentroid(feature.geometry);
       if (!centroid) return;
 
-      // Temporarily pause auto-rotation while the camera flies to the country
       const controls = globeRef.current.controls();
       controls.autoRotate = false;
       if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);

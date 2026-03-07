@@ -9,7 +9,6 @@ export interface SelectedStateData {
   countryEmoji: string;
   cities: City[];
 }
-
 interface UseStateDataReturn {
   stateData: SelectedStateData | null;
   loading: boolean;
@@ -18,10 +17,6 @@ interface UseStateDataReturn {
   clearState: () => void;
 }
 
-/**
- * useStateData — manages async state for the selected state + its cities.
- * Mirrors the shape of useCountryData for consistency (LSP-friendly).
- */
 const useStateData = (): UseStateDataReturn => {
   const [stateData, setStateData] = useState<SelectedStateData | null>(null);
   const [loading, setLoading] = useState(false);

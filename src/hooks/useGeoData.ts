@@ -11,10 +11,6 @@ interface UseGeoDataReturn {
   error: string | null;
 }
 
-/**
- * Fetches the world GeoJSON data required to render country polygons.
- * Isolated from the globe component to respect SRP.
- */
 const useGeoData = (): UseGeoDataReturn => {
   const [geoData, setGeoData] = useState<GeoData | null>(null);
   const [loading, setLoading] = useState(true);

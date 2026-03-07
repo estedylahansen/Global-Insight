@@ -1,0 +1,230 @@
+.country-info-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 340px;
+  height: 100vh;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 14, 26, 0.92);
+  backdrop-filter: blur(14px);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem 1.5rem 2rem;
+  z-index: 10;
+  gap: 0.5rem;
+  animation: slideIn 0.3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  overflow: hidden; 
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.info-header {
+  display: flex;
+  flex-direction: column; /* empilha verticalmente */
+  align-items: center;    /* centraliza horizontalmente */
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  padding-top: 0.25rem;
+}
+
+.country-flag {
+  font-size: 2.0rem;
+  line-height: 1;
+  color: #f59e0b;
+}
+
+.country-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.info-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.section-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin: 0 0 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.state-count {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.72rem;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.info-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.info-value {
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  text-align: right;
+  word-break: break-word;
+}
+
+.state-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1 1 auto;      /* Faz a lista crescer dentro do painel */
+  min-height: 0;       /* Permite o flex funcionar corretamente */
+  overflow-y: auto;    /* Scroll apenas na lista */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.info-section:last-child {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Necessário para o overflow funcionar */
+}
+
+.state-item {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.state-item--clickable {
+  cursor: pointer;
+  transition:
+    background 0.18s,
+    color 0.18s;
+}
+.state-item--clickable:hover {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f1f5f9;
+}
+.state-item--clickable:hover .state-arrow {
+  color: #f59e0b;
+  transform: translateX(2px);
+}
+
+.state-item-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.state-code {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-family: monospace;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.state-arrow {
+  color: #475569;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  transition:
+    color 0.18s,
+    transform 0.18s;
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+}
+
+.info-error {
+  color: #f87171;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media (max-width: 640px) {
+  .country-info-panel {
+    width: 100%;
+    height: 100vh;
+    top: auto;
+    bottom: 0;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}

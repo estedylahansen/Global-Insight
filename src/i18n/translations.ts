@@ -3,9 +3,9 @@ export type Language = 'pt' | 'en';
 export const translations = {
   pt: {
     // Header
-    appTitle: 'Globe Explorer',
+    appTitle: 'Visão Global',
     appSubtitle: 'Clique em um país para explorar suas informações',
-    langTooltip: "Trocar idioma para Inglês", // Tooltip para o botão de troca de idioma
+    langTooltip: "Trocar idioma para Inglês", 
 
     // CountryInfo panel
     panelClose: 'Fechar painel',
@@ -18,7 +18,7 @@ export const translations = {
     labelNative: 'Idioma nativo',
     labelCurrency: 'Moeda',
     labelPhone: 'Telefone',
-    labelFlag: 'bandeira',
+    labelFlag: 'Bandeira',
     statesMore: (n: number) => `+${n} mais…`,
     loadingGlobe: 'Carregando globo…',
     loadingCountry: 'Buscando informações…',
@@ -26,15 +26,16 @@ export const translations = {
     errorGeo: 'Falha ao carregar dados geográficos.',
     errorCountry: 'Não foi possível carregar os dados do país.',
     errorState: 'Não foi possível carregar as cidades do estado.',
+    search: 'Pesquisar…',
 
     // StateView
-    backToGlobe: '← Voltar ao globo',
+    backToGlobe: 'Voltar ao globo',
     stateCities: 'Cidades',
     noCities: 'Nenhuma cidade encontrada.',
-    mapHint: 'Mapa posicional das cidades',
+    mapHint: 'Mapa das cidades',
   },
   en: {
-    appTitle: 'Globe Explorer',
+    appTitle: 'Global Insight',
     appSubtitle: 'Click on a country to explore its information',
     langTooltip: "Switch language to Portuguese",
 
@@ -56,11 +57,12 @@ export const translations = {
     errorGeo: 'Failed to load geographic data.',
     errorCountry: 'Could not load country data.',
     errorState: 'Could not load state cities.',
+    search: 'Search…',
 
-    backToGlobe: '← Back to globe',
+    backToGlobe: 'Back to globe',
     stateCities: 'Cities',
     noCities: 'No cities found.',
-    mapHint: 'Positional city map',
+    mapHint: 'City map',
   },
 } as const;
 

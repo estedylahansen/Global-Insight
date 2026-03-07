@@ -6,17 +6,14 @@ import Starfield from './components/Starfield';
 import useCountryData from './hooks/useCountryData';
 import useStateData from './hooks/useStateData';
 import { useLanguage } from './contexts/LanguageContext';
+import globe from './assets/globe.png';
+import flagUS from './assets/flags/us.png';
+import flagBR from './assets/flags/br.png';
 import type { State } from './types';
 import './App.css';
 
 type ViewMode = 'globe' | 'stateView';
 
-/**
- * App — composition root.
- *
- * Orchestrates state lifting between GlobeComponent, CountryInfo and
- * StateView without coupling any two of them directly (DIP / ISP).
- */
 const App = () => {
     const { t, toggleLanguage, language } = useLanguage();
     const [viewMode, setViewMode] = useState<ViewMode>('globe');
@@ -66,7 +63,12 @@ const App = () => {
                 <div className="app-header-inner">
                     <div className="app-title-group">
                         <h1 className="app-title">
-                            <span className="app-title-icon">🌍</span>
+                            <img
+                                src={globe}
+                                alt="Globo"
+                                className="app-title-icon"
+                                style={{ width: 48, height: 48, verticalAlign: 'middle', marginRight: 8 }}
+                            />
                             {t.appTitle}
                         </h1>
                         <p className="app-subtitle">{t.appSubtitle}</p>
@@ -80,13 +82,9 @@ const App = () => {
                     >
                         <img
                             src={language === 'pt' ? flagBR : flagUS}
-                            alt={language === 'pt' ? 'Bandeira do Brasil' : 'US flag'}
-                            className="lang-flag"
-                            width={24}
-                            height={24}
-                            style={{ marginRight: 8, verticalAlign: 'middle' }}
+                            alt={language === 'pt' ? 'Português' : 'English'}
+                            style={{ width: 24, height: 24 }}
                         />
-                        {language === 'pt' ? 'PT' : 'EN'}
                     </button>
                 </div>
             </header>
@@ -119,6 +117,6 @@ const App = () => {
         </div>
     );
 };
-import flagUS from './assets/flags/us.png';
-import flagBR from './assets/flags/br.png';
+// import flagUS from './assets/flags/us.png';
+// import flagBR from './assets/flags/br.png';
 export default App;

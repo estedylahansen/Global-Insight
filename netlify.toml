@@ -4,6 +4,13 @@
   functions = "netlify/functions"
 
 # Proxy /api/* → serverless function (API key never leaves the server)
+# Matches both direct access (/api/*) and when proxied via root domain (/global-insigth/api/*)
+[[redirects]]
+  from   = "/global-insigth/api/*"
+  to     = "/.netlify/functions/csc-proxy"
+  status = 200
+  force  = true
+
 [[redirects]]
   from   = "/api/*"
   to     = "/.netlify/functions/csc-proxy"
